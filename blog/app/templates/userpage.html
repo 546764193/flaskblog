@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+   <div class="row">
+      <div class="col s8">
+          <br>
+          {% for blog in blogs %}
+          <div class="container">
+          <div class="card s12">
+              <br>
+              <h3 class="truncate"><a href="{{ url_for('blog', blog_id=blog.id)}}">{{ blog.blogtitle }}</a></h3>
+              <div class="truncate">
+
+                    {{ blog.blogcontent|safe}}
+
+
+
+
+
+              </div>
+          </div>
+          </div>
+          {% endfor %}
+      </div>
+       <div class="col s4">
+           <br>
+           <div class="container">
+           <div class="card small col s10">
+               <br>
+                <div class="center">
+                        <img src="{{ url_for('static',filename='dog.jpg')}}" width="160" class="circle responsive-img">
+                </div>
+               <h3  class="center-align card-title">{{ user.username }}</h3>
+                        {% if user.description %}
+                        <h6 style="color: #9c9c9c" class="center-align truncate">{{ user.description }}</h6>
+                        {% else %}
+                        <h6 style="color: #9c9c9c" class="center-align truncate">这个人很懒 什么都没有留下</h6>
+                        {% endif %}
+                    </div>
+            </div>
+           <div class="container">
+                <div class="card small col s10">
+                    <div class="center-align">
+                        文章(0)
+                    </div>
+                    <br>
+                    <div class="chip">
+                    默认
+                    </div>
+                </div>
+            </div>
+      </div>
+   </div>
+
+    </div>
+{% endblock %}

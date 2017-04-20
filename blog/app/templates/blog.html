@@ -1,0 +1,10 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="container">
+    <h2>{{ blog.blogtitle }}</h2>
+    <br>
+    <h6 style="color: #9c9c9c"><i class="material-icons">perm_identity</i>{{ blog.author_username }}</h6>
+    <br>
+    {{ blog.blogcontent }}
+</div>
+{% endblock %}

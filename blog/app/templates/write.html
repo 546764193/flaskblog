@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='wangEditor/dist/css/wangEditor.min.css') }}">
+    <style>
+        .clearfix {clear: none;}
+    </style>
+{% endblock %}
+{% block content %}
+
+<form class="col s12 push-s3" action="{{url_for('write', user_id=current_user.id)}}" method="post">
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="row">
+        {% for catagory, message in messages %}
+        <div class="col s12 valign-wrapper white-text">
+            <div class="{{ catagory }}">{{ message }}</div>
+        </div>
+             {% endfor %}
+            {% endif %}
+            {% endwith %}
+    </div>
+    <div class="container" style="width:70%">
+
+
+        <div class="row">
+            <h3 class="green-text">新文章</h3>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="BlogTitle" name="BlogTitle" type="text" value="">
+                 <!--suppress XmlInvalidId -->
+                <label for="BlogTitle">标题</label>
+            </div>
+        </div>
+        <div id="editor-container">
+            <textarea id="textarea1" name="BlogContent" style="height:400px;max-height:500px;">
+                <p>
+
+                </p>
+            </textarea>
+        </div>
+        <script type="text/javascript" src="{{ url_for('static', filename='wangEditor/dist/js/lib/jquery-1.10.2.min.js') }}">
+        </script>
+        <script type="text/javascript" src="{{ url_for('static', filename='wangEditor/dist/js/wangEditor.min.js') }}">
+        </script>
+        <!--这里引用jquery和wangEditor.js-->
+        <script type="text/javascript">
+            // 获取元素
+            var textarea = document.getElementById('textarea1');
+            // 生成编辑器
+            var editor = new wangEditor(textarea);
+            editor.create();
+        </script>
+        <br>
+
+        <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="action">提交
+                    <i class="material-icons right">send</i>
+                </button>
+        </div>
+    </div>
+
+</form>
+{% endblock %}

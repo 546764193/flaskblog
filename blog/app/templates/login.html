@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <br>
+    <br>
+    <div class="row">
+    <form class="col s6 push-s3" action="login" method="post">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <div class="row">
+                {% for catagory, message in messages %}
+                <div class="col s12 valign-wrapper white-text">
+                    <div class="{{ catagory }}">{{ message }}</div>
+                </div>
+            </div>
+                {% endfor %}
+            {% endif %}
+            {% endwith %}
+            <div class="row">
+                {{ form.hidden_tag() }}
+
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form.UserEmail }}
+                    <!--suppress XmlInvalidId -->
+                    <label for="UserEmail">邮箱</label>
+                    <ul class="errors red-text">
+                        {% for error in form.errors.UserEmail %}
+                        <li>{{ error }}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                   {{ form.PassWord }}
+                    <!--suppress XmlInvalidId -->
+                    <label for="PassWord">密码</label>
+                    <ul class="errors red-text">
+                        {% for error in form.errors.Password %}
+                         <li>{{ error }}</li>
+                    </ul>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="action">登录
+                    <i class="material-icons right">send</i>
+                </button>
+                &#x3000;没有账号？ <a href="{{ url_for('signup')}}">注册</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
